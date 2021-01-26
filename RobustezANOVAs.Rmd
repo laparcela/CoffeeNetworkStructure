@@ -1,0 +1,244 @@
+ANOVAS para pruebas de robustez de la red
+
+```{r}
+library(ggplot2)
+library(plyr)
+library(scales)
+library(BBmisc)
+library(reshape2)
+library(fmsb)
+library(tidyverse)
+library(ggplot2)
+library(agricolae)
+library(classInt)
+library(DescTools)
+library(lsmeans)
+library(sjstats)
+library(pwr)
+setwd("~/Downloads")
+```
+
+```{r}
+setwd("~/Downloads")
+d0=read.csv("coefs0b.txt", header= FALSE) #10,000 ahora 200
+d48=read.csv('coefs48b.txt', header= FALSE) #10, 000 ahora 200
+d25=read.csv('coefs25.txt', header= FALSE) #200
+d51=read.csv('coefs51.txt', header= FALSE) #200
+d37=read.csv('coefs37.txt', header= FALSE) #200
+d52=read.csv('coefs52.txt', header= FALSE) #200
+d13=read.csv('coefs13.txt', header= FALSE) #200
+d50=read.csv('coefs50.txt', header= FALSE) #200
+#d4=read.csv('coefs4.txt', header= FALSE) 1
+#d49=read.csv('coefs49.txt', header= FALSE) 1
+d28=read.csv('coefs28.txt', header= FALSE) #200
+d54=read.csv('coefs54.txt', header= FALSE) #200
+d40=read.csv('coefs40.txt', header= FALSE) #200
+d55=read.csv('coefs55.txt', header= FALSE) #200
+d16=read.csv('coefs16.txt', header= FALSE) #200
+d53=read.csv('coefs53.txt', header= FALSE) #200
+```
+Desviaciones estadnar para grafica
+```{r}
+sd(d0$V1)
+sd(d48$V1)
+sd(d25$V1)
+sd(d51$V1)
+sd(d37$V1)
+sd(d52$V1)
+sd(d13$V1)
+sd(d50$V1)
+sd(d28$V1)
+sd(d54$V1)
+sd(d40$V1)
+sd(d55$V1)
+sd(d16$V1)
+sd(d53$V1)
+```
+
+
+
+ANOVAS entre parejas con y sin
+
+```{r}
+d0$hois<-"whithout"
+d48$hois<-"with"
+d0d48<-rbind(d0, d48)
+
+#ANOVA
+#con intervalos chicos
+anova1 <- aov(V1 ~ hois, data=d0d48)
+#summary(anova1)
+anova(anova1)
+
+anova_stats(anova1)
+
+#TukeyHSD(anova1)
+hola<-lsmeans(anova1, ~ hois, adjust="tukey")
+multcomp::cld(hola, alpha=0.05, Letters=letters)
+
+bartlett.test(V1 ~ hois, data=d0d48) #igualdad de varianzas. debe  ser no significativo
+hist(residuals(anova1)) #debe ser normal
+shapiro.test(residuals(anova1)) #normalidad, debe ser no significativo
+par(mfrow=c(2,2)) # init 4 charts in 1 panel
+plot(anova1)
+```
+
+```{r}
+d25$hois<-"whithout"
+d51$hois<-"with"
+d25d51<-rbind(d25, d51)
+d25d51$V1<-log10(max(d25d51$V1+1) - d25d51$V1)
+d25d51
+```
+```{r}
+#ANOVA
+#con intervalos chicos
+anova1 <- aov(V1 ~ hois, data=d25d51)
+summary(anova1)
+#anova(anova1)
+
+anova_stats(anova1)
+
+#TukeyHSD(anova1)
+hola<-lsmeans(anova1, ~ hois, adjust="tukey")
+multcomp::cld(hola, alpha=0.05, Letters=letters)
+
+bartlett.test(V1 ~ hois, data=d25d51) #igualdad de varianzas. debe  ser no significativo
+hist(residuals(anova1)) #debe ser normal
+shapiro.test(residuals(anova1)) #normalidad, debe ser no significativo
+par(mfrow=c(2,2)) # init 4 charts in 1 panel
+plot(anova1)
+```
+
+```{r}
+d37$hois<-"whithout"
+d52$hois<-"with"
+d37d52<-rbind(d37, d52)
+
+#ANOVA
+#con intervalos chicos
+anova1 <- aov(V1 ~ hois, data=d37d52)
+summary(anova1)
+#anova(anova1)
+
+anova_stats(anova1)
+
+#TukeyHSD(anova1)
+hola<-lsmeans(anova1, ~ hois, adjust="tukey")
+multcomp::cld(hola, alpha=0.05, Letters=letters)
+
+bartlett.test(V1 ~ hois, data=d37d52) #igualdad de varianzas. debe  ser no significativo
+hist(residuals(anova1)) #debe ser normal
+shapiro.test(residuals(anova1)) #normalidad, debe ser no significativo
+par(mfrow=c(2,2)) # init 4 charts in 1 panel
+plot(anova1)
+```
+
+```{r}
+d13$hois<-"whithout"
+d50$hois<-"with"
+d13d50<-rbind(d13, d50)
+#d13d50$V1<-log10(max(d13d50$V1+1) - d13d50$V1)
+
+#ANOVA
+#con intervalos chicos
+anova1 <- aov(V1 ~ hois, data=d13d50)
+summary(anova1)
+#anova(anova1)
+
+anova_stats(anova1)
+
+#TukeyHSD(anova1)
+hola<-lsmeans(anova1, ~ hois, adjust="tukey")
+multcomp::cld(hola, alpha=0.05, Letters=letters)
+
+bartlett.test(V1 ~ hois, data=d13d50) #igualdad de varianzas. debe  ser no significativo
+hist(residuals(anova1)) #debe ser normal
+shapiro.test(residuals(anova1)) #normalidad, debe ser no significativo
+par(mfrow=c(2,2)) # init 4 charts in 1 panel
+plot(anova1)
+```
+
+```{r}
+d28$hois<-"whithout"
+d54$hois<-"with"
+d28d54<-rbind(d28, d54)
+
+#ANOVA
+#con intervalos chicos
+anova1 <- aov(V1 ~ hois, data=d28d54)
+summary(anova1)
+#anova(anova1)
+anova_stats(anova1)
+
+#TukeyHSD(anova1)
+hola<-lsmeans(anova1, ~ hois, adjust="tukey")
+multcomp::cld(hola, alpha=0.05, Letters=letters)
+
+bartlett.test(V1 ~ hois, data=d28d54) #igualdad de varianzas. debe  ser no significativo
+hist(residuals(anova1)) #debe ser normal
+shapiro.test(residuals(anova1)) #normalidad, debe ser no significativo
+par(mfrow=c(2,2)) # init 4 charts in 1 panel
+plot(anova1)
+```
+
+```{r}
+d40$hois<-"whithout"
+d55$hois<-"with"
+d40d55<-rbind(d40, d55)
+
+#ANOVA
+#con intervalos chicos
+anova1 <- aov(V1 ~ hois, data=d40d55)
+summary(anova1)
+#anova(anova1)
+
+anova_stats(anova1)
+
+#TukeyHSD(anova1)
+hola<-lsmeans(anova1, ~ hois, adjust="tukey")
+multcomp::cld(hola, alpha=0.05, Letters=letters)
+
+bartlett.test(V1 ~ hois, data=d40d55) #igualdad de varianzas. debe  ser no significativo
+hist(residuals(anova1)) #debe ser normal
+shapiro.test(residuals(anova1)) #normalidad, debe ser no significativo
+par(mfrow=c(2,2)) # init 4 charts in 1 panel
+plot(anova1)
+```
+
+```{r}
+d16$hois<-"whithout"
+d53$hois<-"with"
+d16d53<-rbind(d16, d53)
+
+#ANOVA
+#con intervalos chicos
+anova1 <- aov(V1 ~ hois, data=d16d53)
+summary(anova1)
+#anova(anova1)
+
+anova_stats(anova1)
+
+#TukeyHSD(anova1)
+hola<-lsmeans(anova1, ~ hois, adjust="tukey")
+multcomp::cld(hola, alpha=0.05, Letters=letters)
+
+bartlett.test(V1 ~ hois, data=d16d53) #igualdad de varianzas. debe  ser no significativo
+hist(residuals(anova1)) #debe ser normal
+shapiro.test(residuals(anova1)) #normalidad, debe ser no significativo
+par(mfrow=c(2,2)) # init 4 charts in 1 panel
+plot(anova1)
+```
+Cohen (1988) has provided benchmarks to define small (η2 = 0.01), medium (η2 = 0.06), and large (η2 = 0.14) effects.
+https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00863/full
+
+Hattie states that an effect size of d=0.2 may be judged to have a small effect, d=0.4 a medium effect and d=0.6 a large effect on outcomes. He defines d=0.4 to be the hinge point, an effect size at which an initiative can be said to be having a 'greater than average influence' on achievement.
+https://www.teachit.so/evidence.htm
+
+
+ANOVAS entre emp con rand, small y scale. NO TIENE SENTIDO porque emp es solo un valor, no es muestra.
+0,25,37,13
+48,51,52,50
+
+4,28,40,16
+49,54,55,53

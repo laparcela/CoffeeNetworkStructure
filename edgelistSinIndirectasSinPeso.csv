@@ -1,0 +1,68 @@
+Azteca,Phoridae
+Azteca,Pheidole ctp
+Azteca,Pseudomyrmex spp
+C. virdis,Azteca
+Azteca,L. coffeella
+L. coffeella,Azteca
+Azteca,C. virdis
+C. virdis,Coffea
+C. virdis,L. lecanii
+C. virdis,Pheidole ctp
+C. virdis,Pseudomyrmex spp
+A. Orbigera,C. virdis
+C. virdis,A. Orbigera
+Parasitoides 1,C. virdis
+C. virdis,Parasitoides 1
+H. vastatrix,Coffea
+H. vastatrix,L. lecanii
+H. hampei,Aves y murcielagos
+H. hampei,Pheidole ctp
+H. hampei,Pheidole protensa
+H. hampei,Pseudomyrmex spp
+H. hampei,Wasmania auropunctata
+H. hampei,Procryptocerus hylaeus
+H. hampei,Coffea
+Coffea,H. hampei
+L. coffeella,Coffea
+L. coffeella,Pseudomyrmex spp
+Parasitoides 2,A. Orbigera
+A. Orbigera,Parasitoides 2
+Phoridae,Azteca
+Coffea,C. virdis
+Coffea,H. vastatrix
+Coffea,L. coffeella
+Coffea,Abejas nativas
+herbivoros,Coffea
+Coffea,herbivoros
+L. lecanii,C. virdis
+L. lecanii,H. vastatrix
+Aves y murcielagos,H. hampei
+Aves y murcielagos,Aranas
+Aves y murcielagos,herbivoros
+Aranas,Aves y murcielagos
+Aranas,Parasitoides 3
+Aranas,herbivoros
+Parasitoides 3,Aranas
+Parasitoides 3,herbivoros
+herbivoros,Aves y murcielagos
+herbivoros,Aranas
+herbivoros,Parasitoides 3
+Pheidole ctp,Azteca
+Pheidole ctp,H. hampei
+Pheidole ctp,Pheidole protensa
+Pheidole ctp,Pseudomyrmex spp
+Pheidole ctp,C. virdis
+Pheidole protensa,H. hampei
+Pheidole protensa,Pheidole ctp
+Pseudomyrmex spp,Azteca
+Pseudomyrmex spp,C. virdis
+Pseudomyrmex spp,H. hampei
+Pseudomyrmex spp,L. coffeella
+Pseudomyrmex spp,Pheidole ctp
+Wasmania auropunctata,H. hampei
+Procryptocerus hylaeus,H. hampei
+Abejas nativas,Coffea
+Abejas nativas,Apis mielifera
+Apis mielifera,Abejas nativas
+Apis mielifera,Coffea
+Coffea,Apis mielifera
