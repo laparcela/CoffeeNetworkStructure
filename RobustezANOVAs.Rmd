@@ -15,11 +15,11 @@ library(DescTools)
 library(lsmeans)
 library(sjstats)
 library(pwr)
-setwd("~/Downloads")
+setwd("~/Documents/doctorado/archivosgenerados_estabanendescargas")
 ```
 
 ```{r}
-setwd("~/Downloads")
+setwd("~/Documents/doctorado/archivosgenerados_estabanendescargas")
 d0=read.csv("coefs0b.txt", header= FALSE) #10,000 ahora 200
 d48=read.csv('coefs48b.txt', header= FALSE) #10, 000 ahora 200
 d25=read.csv('coefs25.txt', header= FALSE) #200
@@ -28,8 +28,8 @@ d37=read.csv('coefs37.txt', header= FALSE) #200
 d52=read.csv('coefs52.txt', header= FALSE) #200
 d13=read.csv('coefs13.txt', header= FALSE) #200
 d50=read.csv('coefs50.txt', header= FALSE) #200
-#d4=read.csv('coefs4.txt', header= FALSE) 1
-#d49=read.csv('coefs49.txt', header= FALSE) 1
+d4=read.csv('coefs4.txt', header= FALSE) 
+d49=read.csv('coefs49.txt', header= FALSE) 
 d28=read.csv('coefs28.txt', header= FALSE) #200
 d54=read.csv('coefs54.txt', header= FALSE) #200
 d40=read.csv('coefs40.txt', header= FALSE) #200
@@ -158,6 +158,32 @@ shapiro.test(residuals(anova1)) #normalidad, debe ser no significativo
 par(mfrow=c(2,2)) # init 4 charts in 1 panel
 plot(anova1)
 ```
+
+
+```{r}
+d4$hois<-"whithout"
+d49$hois<-"with"
+d4d49<-rbind(d4, d49)
+
+#ANOVA
+#con intervalos chicos
+anova1 <- aov(V1 ~ hois, data=d4d49)
+summary(anova1)
+#anova(anova1)
+anova_stats(anova1)
+
+#TukeyHSD(anova1)
+hola<-lsmeans(anova1, ~ hois, adjust="tukey")
+multcomp::cld(hola, alpha=0.05, Letters=letters)
+
+bartlett.test(V1 ~ hois, data=d4d49) #igualdad de varianzas. debe  ser no significativo
+hist(residuals(anova1)) #debe ser normal
+shapiro.test(residuals(anova1)) #normalidad, debe ser no significativo
+par(mfrow=c(2,2)) # init 4 charts in 1 panel
+plot(anova1)
+```
+
+
 
 ```{r}
 d28$hois<-"whithout"
